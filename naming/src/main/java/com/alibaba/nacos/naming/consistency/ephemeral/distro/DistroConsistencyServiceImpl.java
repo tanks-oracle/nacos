@@ -126,7 +126,7 @@ public class DistroConsistencyServiceImpl implements EphemeralConsistencyService
         }
         // size = 1 means only myself in the list, we need at least one another server alive:
         
-        Loggers.DISTRO.info("HealthyServers().size() : " + serverListManager.getHealthyServers().size() );
+        Loggers.DISTRO.info("HealthyServers().size()  : " + serverListManager.getHealthyServers().size() );
         while (serverListManager.getHealthyServers().size() <= 1) {
             Thread.sleep(1000L);
             Loggers.DISTRO.info("waiting server list init...");
