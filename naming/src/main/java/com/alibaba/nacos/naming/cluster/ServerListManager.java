@@ -386,7 +386,7 @@ public class ServerListManager {
         if (CollectionUtils.isEmpty(servers)) {
             return;
         }
-
+        Loggers.SRV_LOG.info("distroConfig size :." + servers.size());
         List<Server> newHealthyList = new ArrayList<>(servers.size());
         long now = System.currentTimeMillis();
         for (Server s: servers) {

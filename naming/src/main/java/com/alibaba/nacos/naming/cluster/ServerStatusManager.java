@@ -45,6 +45,7 @@ public class ServerStatusManager {
 
     @PostConstruct
     public void init() {
+    	Loggers.SRV_LOG.info("ServerStatusManager  init add registerServerStatusUpdater");
         GlobalExecutor.registerServerStatusUpdater(new ServerStatusUpdater());
     }
 

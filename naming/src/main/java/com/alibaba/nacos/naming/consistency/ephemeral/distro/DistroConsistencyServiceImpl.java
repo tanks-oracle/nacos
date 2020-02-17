@@ -129,6 +129,7 @@ public class DistroConsistencyServiceImpl implements EphemeralConsistencyService
         Loggers.DISTRO.info("HealthyServers().size()  : " + serverListManager.getHealthyServers().size() );
         while (serverListManager.getHealthyServers().size() <= 1) {
             Thread.sleep(1000L);
+            Loggers.DISTRO.info("HealthyServers().size()  : " + serverListManager.getHealthyServers().size() );
             Loggers.DISTRO.info("waiting server list init...");
         }
 
