@@ -18,6 +18,7 @@ package com.alibaba.nacos.naming.consistency;
 import com.alibaba.nacos.api.exception.NacosException;
 import com.alibaba.nacos.naming.consistency.ephemeral.EphemeralConsistencyService;
 import com.alibaba.nacos.naming.consistency.persistent.PersistentConsistencyService;
+import com.alibaba.nacos.naming.misc.Loggers;
 import com.alibaba.nacos.naming.pojo.Record;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,6 +73,10 @@ public class DelegateConsistencyServiceImpl implements ConsistencyService {
 
     @Override
     public boolean isAvailable() {
+    	boolean isAvaliable1 = ephemeralConsistencyService.isAvailable() ;
+    	boolean isAvaliable2 = persistentConsistencyService.isAvailable();
+    	Loggers.SRV_LOG.info("ephemeralConsistencyService.isAvailable()=" + isAvaliable1);
+    	Loggers.SRV_LOG.info("persistentConsistencyService.isAvailable()=" + isAvaliable1);
         return ephemeralConsistencyService.isAvailable() && persistentConsistencyService.isAvailable();
     }
 

@@ -901,6 +901,7 @@ public class RaftCore {
     }
 
     public boolean isInitialized() {
+    	Loggers.RAFT.warn("isInitialized={}",  initialized || !globalConfig.isDataWarmup());
         return initialized || !globalConfig.isDataWarmup();
     }
 

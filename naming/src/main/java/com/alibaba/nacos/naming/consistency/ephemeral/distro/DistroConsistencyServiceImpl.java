@@ -142,7 +142,8 @@ public class DistroConsistencyServiceImpl implements EphemeralConsistencyService
             }
             // try sync data from remote server:
             if (syncAllDataFromRemote(server)) {
-                initialized = true;
+            	initialized = true;
+            	Loggers.DISTRO.info("syncAllDataFromRemote is ok, service DistroConsistencyServiceImpl initialized: " +  initialized);
                 return;
             }
         }

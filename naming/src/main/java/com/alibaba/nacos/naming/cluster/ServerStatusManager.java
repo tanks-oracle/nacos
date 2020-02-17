@@ -61,6 +61,7 @@ public class ServerStatusManager {
         } else {
             serverStatus = ServerStatus.DOWN;
         }
+        Loggers.SRV_LOG.info("ServerStatusManager serverStatus: " + serverStatus);
     }
 
     public ServerStatus getServerStatus() {
