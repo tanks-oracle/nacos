@@ -55,6 +55,9 @@ public class ServerStatusManager {
             serverStatus = ServerStatus.valueOf(switchDomain.getOverriddenServerStatus());
             return;
         }
+        
+        //OpenJDK Runtime Environment (build 1.8.0_242-b08)
+        //OpenJDK 64-Bit Server VM (build 25.242-b08, mixed mode)
 
         if (consistencyService.isAvailable()) {
             serverStatus = ServerStatus.UP;
