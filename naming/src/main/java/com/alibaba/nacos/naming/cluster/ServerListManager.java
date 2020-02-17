@@ -91,6 +91,7 @@ public class ServerListManager {
         List<String> serverList = new ArrayList<>();
         try {
             serverList = readClusterConf();
+            Loggers.SRV_LOG.info("get cluster config file content:" + serverList.size());
         } catch (Exception e) {
             Loggers.SRV_LOG.warn("failed to get config: " + CLUSTER_CONF_FILE_PATH, e);
         }
@@ -179,6 +180,7 @@ public class ServerListManager {
         List<Server> tmpServerList = new ArrayList<>();
 
         for (String config : configs) {
+        	Loggers.SRV_LOG.info("config info:", config);
             tmpServerList.clear();
             // site:ip:lastReportTime:weight
             String[] params = config.split("#");
@@ -288,7 +290,8 @@ public class ServerListManager {
             try {
                 List<Server> refreshedServers = refreshServerList();
                 List<Server> oldServers = servers;
-
+                Loggers.SRV_LOG.info("refreshedServers:", refreshedServers);
+                Loggers.SRV_LOG.info("refreshedServers:", refreshedServers);
                 if (CollectionUtils.isEmpty(refreshedServers)) {
                     Loggers.RAFT.warn("refresh server list failed, ignore it.");
                     return;
@@ -298,6 +301,7 @@ public class ServerListManager {
 
                 List<Server> newServers = (List<Server>) CollectionUtils.subtract(refreshedServers, oldServers);
                 if (CollectionUtils.isNotEmpty(newServers)) {
+                	Loggers.RAFT.info("server list is changed,new servers need removed:" + newServers);
                     servers.addAll(newServers);
                     changed = true;
                     Loggers.RAFT.info("server list is updated, new: {} servers: {}", newServers.size(), newServers);
@@ -305,6 +309,7 @@ public class ServerListManager {
 
                 List<Server> deadServers = (List<Server>) CollectionUtils.subtract(oldServers, refreshedServers);
                 if (CollectionUtils.isNotEmpty(deadServers)) {
+                	Loggers.RAFT.info("server list is changed,dead servers need removed:" + deadServers);
                     servers.removeAll(deadServers);
                     changed = true;
                     Loggers.RAFT.info("server list is updated, dead: {}, servers: {}", deadServers.size(), deadServers);
@@ -375,7 +380,7 @@ public class ServerListManager {
 
     private void checkDistroHeartbeat() {
 
-        Loggers.SRV_LOG.debug("check distro heartbeat.");
+        Loggers.SRV_LOG.info("check distro heartbeat.");
 
         List<Server> servers = distroConfig.get(LOCALHOST_SITE);
         if (CollectionUtils.isEmpty(servers)) {
@@ -441,8 +446,8 @@ public class ServerListManager {
 
                 lastHealthServerMillis = System.currentTimeMillis();
             }
-
             healthyServers = newHealthyList;
+            Loggers.SRV_LOG.info("new healthy server list :"  + healthyServers.size());
             notifyListeners();
         }
     }

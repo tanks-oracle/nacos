@@ -17,6 +17,7 @@ package com.alibaba.nacos.naming.cluster;
 
 import com.alibaba.nacos.naming.consistency.ConsistencyService;
 import com.alibaba.nacos.naming.misc.GlobalExecutor;
+import com.alibaba.nacos.naming.misc.Loggers;
 import com.alibaba.nacos.naming.misc.SwitchDomain;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,7 @@ public class ServerStatusManager {
     }
 
     private void refreshServerStatus() {
-
+    	Loggers.SRV_LOG.info("refreshServerStatus started: " + switchDomain.getOverriddenServerStatus());
         if (StringUtils.isNotBlank(switchDomain.getOverriddenServerStatus())) {
             serverStatus = ServerStatus.valueOf(switchDomain.getOverriddenServerStatus());
             return;
